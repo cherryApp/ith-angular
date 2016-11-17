@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html data-ng-app="ihr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Starter Template for Bootstrap 3.3.7</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div><!--.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="starter-template">
+            <input type="text">
+            <h1>Teams</h1>
+            <p class="lead">Now you can start your own projet with <a target="_blank" href="http://getbootstrap.com/">Bootstrap 3.3.7</a>. This plugin is a fork from <a href="https://github.com/le717/brackets-html-skeleton#readme">HTML Skeleton</a>.</p>
+        </div>
+        
+        <div data-ng-controller="soccerController as ctrl">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>home</th>
+                        <th>away</th>
+                        <th>when</th>
+                        <th>type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="match in ctrl.soccer.matches">
+                        <td data-ng-bind="match.home"></td>
+                        <td data-ng-bind="match.away"></td>
+                        <td data-ng-bind="match.when"></td>
+                        <td data-ng-bind="match.type"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        
+        
+        <div data-ng-controller="userController as ctrl">
+           <form data-ng-submit="ctrl.regUser($event)" method="get" action="/">
+                <label>Vezetéknév</label>
+                <br>
+                <input type="text" name="firstName" data-ng-model="ctrl.user.name.first">
+                <br>
+                <label>Keresztnév</label>
+                <br>
+                <input type="text" name="lastName" data-ng-model="ctrl.user.name.last">
+                <br>
+                <label>Kor</label>
+                <br>
+                <input type="text" name="age" data-ng-model="ctrl.user.age">
+                <br>
+                <label>Foglalkozás</label>
+                <br>
+                <input type="text" name="job" data-ng-model="ctrl.user.job">  
+                <br>
+                <button type="submit">regisztráció</button>             
+           </form>
+            
+        </div>
+        
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="js/main.min.js"></script>
+</body>
+</html>
