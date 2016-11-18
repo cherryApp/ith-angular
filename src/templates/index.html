@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>home</th>
+            <th>away</th>
+            <th>when</th>
+            <th>type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="match in ctrl.soccer.matches">
+            <td data-ng-bind="match.home"></td>
+            <td data-ng-bind="match.away"></td>
+            <td data-ng-bind="match.when"></td>
+            <td data-ng-bind="match.type"></td>
+        </tr>
+    </tbody>
+</table>
