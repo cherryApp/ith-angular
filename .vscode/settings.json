@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "mix.rootPath": "build",
+    "mix.port": 8181,
+    "express.relativeRoot": "/ith-angular/build",
+    "express.portNumber": 8181
+}
