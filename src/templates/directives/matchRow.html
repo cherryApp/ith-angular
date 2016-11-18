@@ -1,6 +1,50 @@
-<tr data-ng-repeat="match in ctrl.soccer.matches">
-    <td data-ng-bind="match.home"></td>
-    <td data-ng-bind="match.away"></td>
-    <td data-ng-bind="match.when"></td>
-    <td data-ng-bind="match.type"></td>
-</tr>
+<table class="table table-striped">
+   <caption>
+       <div class="row">
+           <div class="col-xs-3 col-xs-offset-9">
+               <input type="text" class="form-control" data-ng-model="search.home">
+           </div>
+       </div>
+   </caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>home</th>
+            <th>away</th>
+            <th>when</th>
+            <th>type</th>
+            <th>műveletek</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-class="{success: $first}" 
+           data-ng-repeat="match in matches | filter:search track by $index">
+            <td>{{ ($index + 1) }}</td>
+            <td>
+                <input type="text" data-ng-model="match.home">
+            </td>
+            <td>
+                <input type="text" data-ng-model="match.away">
+            </td>
+            <td>
+                <input type="text" data-ng-model="match.when">
+            </td>
+            <td>
+                <input type="text" data-ng-model="match.type">
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-info" data-ng-click="updateRow(match)">módosítás</button>
+                    <button class="btn btn-danger" data-ng-click="deleteRow(match)">törlés</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6">
+                összesen: <span data-ng-bind="matches.length"></span> sor
+            </th>
+        </tr>
+    </tfoot>
+</table>
