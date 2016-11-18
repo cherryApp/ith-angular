@@ -50,7 +50,12 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/main.js', 'src/js/controllers/**/*.js'],
+          src: [
+              'src/bower_components/angular-route/angular-route.js',
+              'src/js/main.js', 
+              'src/js/directives/**/*.js',
+              'src/js/controllers/**/*.js'
+          ],
           dest: 'build/js/concat.js',
         },
       }

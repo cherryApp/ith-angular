@@ -20,32 +20,7 @@
             <p class="lead">Now you can start your own projet with <a target="_blank" href="http://getbootstrap.com/">Bootstrap 3.3.7</a>. This plugin is a fork from <a href="https://github.com/le717/brackets-html-skeleton#readme">HTML Skeleton</a>.</p>
         </div>
         
-        <div data-ng-include="getCurrentPage()" data-ng-controller="soccerController as ctrl"></div>
-        
-        
-        
-        <div data-ng-controller="userController as ctrl">
-           <form data-ng-submit="ctrl.regUser($event)" method="get" action="/">
-                <label>Vezetéknév</label>
-                <br>
-                <input type="text" name="firstName" data-ng-model="ctrl.user.name.first">
-                <br>
-                <label>Keresztnév</label>
-                <br>
-                <input type="text" name="lastName" data-ng-model="ctrl.user.name.last">
-                <br>
-                <label>Kor</label>
-                <br>
-                <input type="text" name="age" data-ng-model="ctrl.user.age">
-                <br>
-                <label>Foglalkozás</label>
-                <br>
-                <input type="text" name="job" data-ng-model="ctrl.user.job">  
-                <br>
-                <button type="submit">regisztráció</button>             
-           </form>
-            
-        </div>
+        <div ng-view></div>
         
     </div>
 
