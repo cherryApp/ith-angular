@@ -1,5 +1,8 @@
 var ihr = angular.module('ihr', ['ngRoute']);
-ihr.config(['$routeProvider', function($routeProvider){
+ihr.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider){
+
+    $httpProvider.defaults.withCredentials = true;
+
     $routeProvider.when('/soccer', {
         controller: 'soccerController',
         controllerAs: 'ctrl',
