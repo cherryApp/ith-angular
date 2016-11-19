@@ -54,6 +54,7 @@ module.exports = function(grunt) {
               'src/bower_components/angular-route/angular-route.js',
               'src/js/main.js', 
               'src/js/directives/**/*.js',
+              'src/js/factories/**/*.js',
               'src/js/controllers/**/*.js'
           ],
           dest: 'build/js/concat.js',

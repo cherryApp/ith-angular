@@ -2,6 +2,7 @@ var ihr = angular.module('ihr', ['ngRoute']);
 ihr.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider){
 
     $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.headers.common.Token = 'szupertoken';
 
     $routeProvider.when('/soccer', {
         controller: 'soccerController',
@@ -18,19 +19,12 @@ ihr.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
     });
 }]);
 
-ihr.controller('greetController', ['$scope', '$http', function($scope, $http) {
-    $scope.greet = 'hola'; 
-
-    $scope.$watch('greet', function(newData, oldData) {
-        console.log(newData, oldData); 
-        if (newData.indexOf('pityu') < 0) {
-            $scope.greet = 'pityu';
-        }
-    });
-}]); 
+// Constant.
+ihr.constant('Config', {
+    apiServer: 'http://localhost:3000'
+});
 
 
-               
                
                
                

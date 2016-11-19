@@ -14,7 +14,11 @@ var basePath = path.join(
 // Create new file from template.
 var createFileFromTemplate = (path, templatePath, callback) => {
     fs.readFile(templatePath, 'utf8', (err, tempData) => {
-        fs.writeFile(path, tempData, 'utf8', (err, fileData) => {
+        let json = JSON.parse(tempData);
+        for (var k in json.matches) {
+            json.matches[k].id = parseInt(k)+1;
+        }
+        fs.writeFile(path, JSON.stringify(json), 'utf8', (err, fileData) => {
             callback(tempData);
         });
     });
@@ -35,7 +39,7 @@ var getJsonFile = (filePath, callback) => {
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    var filePath = basePath.replace('soccer', 'soccer_'+req.cookies.ith);
+    var filePath = basePath.replace('soccer', 'soccer_'+req.get('Token'));
     getJsonFile(filePath, (jsonObject) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(jsonObject.matches, null, 4));
@@ -44,18 +48,30 @@ router.get('/', (req, res, next) => {
 
 // Update.
 router.post('/:id', (req, res, next) => {
-    var filePath = basePath.replace('soccer', 'soccer_'+req.cookies.ith);
+    var filePath = basePath.replace('soccer', 'soccer_'+req.get('Token'));
     getJsonFile(filePath, (jsonObject) => {
-        jsonObject.matches[req.params.id] = req.body;
+        let error = '';
+        let found = false;
+        for (var k in jsonObject.matches) {
+            if (jsonObject.matches[k].id == req.params.id) {
+                jsonObject.matches[k] = req.body;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            error = 'Error in request: ' + JSON.stringify(req.body);
+        }
         fs.writeFile(filePath, JSON.stringify(jsonObject), 'utf8', (err, data) => {
-            res.send(JSON.stringify({success: true}, null, 4));
+            res.send(JSON.stringify({success: true, error: error}, null, 4));
         });
     });
 });
 
 // Delete.
 router.delete('/:id', (req, res, next) => {
-    var filePath = basePath.replace('soccer', 'soccer_'+req.cookies.ith);
+    var filePath = basePath.replace('soccer', 'soccer_'+req.get('Token'));
     getJsonFile(filePath, (jsonObject) => {
         jsonObject.matches.splice(req.params.id, 1);
         fs.writeFile(filePath, JSON.stringify(jsonObject), 'utf8', (err, data) => {

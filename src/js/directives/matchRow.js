@@ -3,26 +3,23 @@ ihr.directive('matchRow', [function(){
         restrict: 'AE',
         templateUrl: 'templates/directives/matchRow.html',
         scope: {
-            matches: '='
+            matches: '=',
+            serverError: '='
         },
-        controller: ['$scope', '$http', function($scope, $http) {
-            // Check input data.
-            if (typeof $scope.matches !== 'undefined') {
-                if (!Array.isArray($scope.matches)) {
-                    console.error('A megadott matches attribútum nem tömb.');
-                    $scope.matches = [];
-                }                
-            }
+        controller: [
+            '$scope',
+            '$http',
+            'Config',
+            'matchFactory',
+            function(
+                $scope,
+                $http,
+                Config,
+                matchFactory) {
             
             // Update or delete rows.
             $scope.updateRow = function(match) {
-                var index = $scope.matches.indexOf(match);
-                $http.post('http://localhost:3000/matches/'+index, match)
-                    .then(function(res) {
-                        if (res.data.success) {
-                            console.info('update success');
-                        }
-                    });
+                matchFactory.updateMatch(match);
             };
             $scope.deleteRow = function(match) {
                 if (!confirm('Biztosan törli a '+match.home+' és '+match.away+" meccset?")) {

@@ -1,5 +1,12 @@
 <table class="table table-striped">
    <caption>
+      <div class="row" data-ng-show="serverError !== ''">
+          <div class="col-xs-12">
+              <div class="alert alert-danger">
+                  <strong>Hiba: </strong> {{ serverError }}
+              </div>
+          </div>
+      </div>
        <div class="row">
            <div class="col-xs-3 col-xs-offset-9">
                <input type="text" class="form-control" data-ng-model="search.home">
